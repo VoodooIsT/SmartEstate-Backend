@@ -28,7 +28,7 @@ app.use(cookieParser());
 
 app.use('/api/v1', userRouter);
 app.use('/api/v1', authRouter);
-app.use('/api/v1', listingRouter)
+app.use('/api/v1/listing', listingRouter);
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
