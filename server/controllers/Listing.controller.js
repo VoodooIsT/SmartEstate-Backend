@@ -18,12 +18,20 @@ export const createListing = async(req, res, next) => {
 };
 
 export const updateListing = async(req, res, next) => {
+    if(req.listing.id != req.params.id)
+            return next(401, "You can only update your own account!");
+
     try{
 
-        if(req.listing.id != req.params.id)
-            return next(401, "You can only update your own account!")
+        const updatedListing = Listing.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true }
+        );
+        res.status(200).json(updatedListing)
+        
 
     } catch(error){
-
+        next(error);
     }
 }
